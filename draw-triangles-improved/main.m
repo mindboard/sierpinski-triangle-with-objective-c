@@ -1,4 +1,3 @@
-@import Foundation;
 
 #import "PngUtil.h"
 #import "ManyTriangleMaker.h"
