@@ -131,7 +131,7 @@
 
 	CGContextAddPath(mCtx, path);
 
-	// 3) sttoke
+	// 3) stroke
 	CGContextStrokePath(mCtx);
 
 	// 4) release
