@@ -69,17 +69,47 @@
 @end
 
 
-@interface ColorUtil : NSObject {
-}
+@interface ColorFactory : NSObject {}
+
+@property CGFloat a;
+@property CGFloat r;
+@property CGFloat g;
+@property CGFloat b;
+
 + (CGColorRef) blackColor;
+
+- (id)
+   	initWithAlpha: (CGFloat) a
+   	andR: (CGFloat) r
+   	andG: (CGFloat) g
+   	andB: (CGFloat) b;
+- (CGColorRef) color; 
 @end
 
-@implementation ColorUtil
-+ (CGColorRef)
-   	blackColor {
+@implementation ColorFactory
++ (CGColorRef) blackColor {
+	ColorFactory *black = [[ColorFactory alloc] initWithAlpha:1.0 andR:0 andG:0 andB:0];
+	return [black color];
+}
 
-	CGFloat colorRGBA[] = { 0.0, 0.0, 0.0, 1.0 };
+- (id)
+   	initWithAlpha: (CGFloat) a
+   	andR: (CGFloat) r
+   	andG: (CGFloat) g
+   	andB: (CGFloat) b {
 
+	self = [super init];
+	if( self ){
+	   	self.a = a;
+	   	self.r = r;
+	   	self.g = g;
+	   	self.b = b;
+	}
+	return (self);
+}
+
+- (CGColorRef) color {
+	CGFloat colorRGBA[] = { self.r, self.g, self.b, self.a };
 	CGColorSpaceRef space = CGColorSpaceCreateDeviceRGB();
    	CGColorRef color = CGColorCreate(space,colorRGBA);
    	CGColorSpaceRelease(space);
@@ -116,7 +146,7 @@
 	andRightBottom : (CGPoint) rightBottomPoint {
 
 	// 1) color and strokeWidth
-	CGColorRef black = [ColorUtil blackColor];
+	CGColorRef black = [ColorFactory blackColor];
 	CGContextSetStrokeColorWithColor(mCtx, black);
 	float strokeWidth = 1.0;
 	CGContextSetLineWidth(mCtx, strokeWidth);
