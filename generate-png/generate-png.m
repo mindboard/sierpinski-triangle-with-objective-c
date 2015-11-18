@@ -72,5 +72,6 @@
 int main(int argc, const char * argv[]){
 	CGContextRef ctx = [PngUtil contextWithWidth:500 andHeight:500];
 	[PngUtil export:ctx withFilePath:@"result.png"];
+	CFRelease(ctx);
 	return (0);
 }
