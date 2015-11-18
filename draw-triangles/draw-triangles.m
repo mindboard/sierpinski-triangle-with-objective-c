@@ -191,19 +191,35 @@
    	andStartPoint   : (CGPoint) startPoint
    	andLengthOfSide : (int) lengthOfSide {
 
+	// 1) check counter
 	if( counter<0 ){
 		return ;
 	}
 
-	CGPoint bottomLeftPoint  = CGPointMake( startPoint.x - lengthOfSide/2, startPoint.y + lengthOfSide ); 
-	CGPoint bottomRightPoint = CGPointMake( startPoint.x + lengthOfSide/2, startPoint.y + lengthOfSide ); 
+	// 2) draw triangle
+	CGPoint bottomLeftPoint  = CGPointMake(
+		   	startPoint.x - lengthOfSide/2, startPoint.y + lengthOfSide ); 
+	CGPoint bottomRightPoint = CGPointMake(
+		   	startPoint.x + lengthOfSide/2, startPoint.y + lengthOfSide ); 
 
 	[triangle drawWithTop:startPoint andLeftBottom:bottomLeftPoint andRightBottom:bottomRightPoint];
 
-	// recursion
-	[ManyTriangleMaker drawTriangle: triangle andCounter:counter-1 andStartPoint:startPoint       andLengthOfSide:lengthOfSide/2 ];
-	[ManyTriangleMaker drawTriangle: triangle andCounter:counter-1 andStartPoint:bottomLeftPoint  andLengthOfSide:lengthOfSide/2 ];
-	[ManyTriangleMaker drawTriangle: triangle andCounter:counter-1 andStartPoint:bottomRightPoint andLengthOfSide:lengthOfSide/2 ];
+	// 3) recursion
+	[ManyTriangleMaker
+	   	drawTriangle   : triangle
+	   	andCounter     : counter-1
+	   	andStartPoint  : startPoint
+ 		andLengthOfSide: lengthOfSide/2 ];
+	[ManyTriangleMaker
+	   	drawTriangle   : triangle
+	   	andCounter     : counter-1
+	   	andStartPoint  : bottomLeftPoint
+	  	andLengthOfSide: lengthOfSide/2 ];
+	[ManyTriangleMaker
+	   	drawTriangle   : triangle
+	   	andCounter     : counter-1
+	   	andStartPoint  : bottomRightPoint
+	   	andLengthOfSide: lengthOfSide/2 ];
 }
 
 - (id)
