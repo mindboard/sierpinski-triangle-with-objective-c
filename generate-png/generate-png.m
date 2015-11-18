@@ -10,7 +10,14 @@
    	andHeight        : (int)height {
 
 	CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-	CGContextRef ctx = CGBitmapContextCreate( nil, width, height, 8, 0, colorSpace, kCGImageAlphaPremultipliedFirst);
+	CGContextRef ctx = CGBitmapContextCreate(
+		   	nil,
+		   	width,
+		   	height,
+		   	8,     // bitsPerComponent
+		   	0,     // bytesPerRow 
+		   	colorSpace,
+		   	kCGImageAlphaPremultipliedFirst);
    	CGColorSpaceRelease(colorSpace);
 
 	return ctx;
